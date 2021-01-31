@@ -2,17 +2,16 @@
 
 namespace dups
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
         }
     }
-
-    public class DuplicateChecker
+    public static class Util
     {
-        public int FindDups(string input)
+        public static int FindDups(string input)
         {
             int dupNum = 0;
             
