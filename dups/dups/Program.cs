@@ -6,7 +6,16 @@ namespace dups
     {
         static void Main(string[] args)
         {
-            int result = Util.FindDups("aafzYbCe");
+            Console.Write("Please enter text: ");
+            string userInput = Console.ReadLine();
+            int result = Util.FindDups(userInput);
+            while (result == -1)
+            {
+                Console.Write("Non-alphanumeric characters are not permitted. Please try again: ");
+                userInput = Console.ReadLine();
+                result = Util.FindDups(userInput);
+            }
+            Console.WriteLine(string.Format("Input: {0}, Duplicates: {1}", userInput, result));
         }
     }
     public static class Util
