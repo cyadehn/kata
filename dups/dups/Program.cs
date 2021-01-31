@@ -6,7 +6,7 @@ namespace dups
     {
         static void Main(string[] args)
         {
-            int result = Util.FindDups("#aabCe");
+            int result = Util.FindDups("aafzYbCe");
         }
     }
     public static class Util
@@ -15,17 +15,30 @@ namespace dups
         {
             int dupNum = 0;
             // Convert string to array of characters + sort
-            char[] chars = input.ToCharArray();
+            char[] chars = input.ToUpper().ToCharArray();
             Array.Sort(chars);
-
+            // Track previous char for comparison + toggle to true if a dup has already been counted for the current duplicate
+            char prevChar = '!';
+            bool dupAlreadyCounted = false;
             for (int i = 0; i < chars.Length; i++)
             {
-                char current = char.ToUpper(chars[i]);
+                char current = chars[i];
                 // If current char is non-alpha or non-numeric, return -1 to allow program to re-prompt user for input
                 if (!IsAlphaNum(current))
                 {
                     return -1;
                 }
+                // Increment the number of duplicate characters if the current and previous match && a duplicate has not already been provided
+                else if (current == prevChar && !dupAlreadyCounted)
+                {
+                    dupNum += 1;
+                    dupAlreadyCounted = true;
+                }
+                else if (current != prevChar)
+                {
+                    dupAlreadyCounted = false;
+                }
+                prevChar = current;
             }
             return dupNum;
         }
